@@ -28,6 +28,7 @@ public class BlockyBassBlockEntityRenderer implements BlockEntityRenderer<Blocky
 		float rotation = this.getRotationDeg(bass);
 		matrices.mulPose(Axis.YP.rotationDegrees(rotation));
 		matrices.mulPose(Axis.XP.rotationDegrees(180));
+		this.model.setRotations(bass, tickDelta);
 		this.model.renderToBuffer(matrices, vertices, light, overlay, 1, 1, 1, 1);
 		matrices.popPose();
 	}

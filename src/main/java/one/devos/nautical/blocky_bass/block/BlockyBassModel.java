@@ -65,9 +65,9 @@ public class BlockyBassModel extends Model {
 	}
 
 
-	public void setRotations(float head, float mouth, float tail) {
-		this.head.yRot = head;
-		this.mouth.xRot = mouth;
-		this.tail.yRot = tail;
+	public void setRotations(BlockyBassBlockEntity bass, float partialTicks) {
+		this.head.yRot = -bass.head.value(partialTicks);
+		this.mouth.zRot = -bass.mouth.value(partialTicks);
+		this.tail.yRot = bass.tail.value(partialTicks);
 	}
 }
