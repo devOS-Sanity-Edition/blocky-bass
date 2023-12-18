@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "blocky_bass",
   "version": "${version}",
-  "name": "Example Mod",
+  "name": "Blocky Bass",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Tropheus Jay"
+    "devOS: Sanity Edition, Team Nautical"
   ],
   "contact": {
-    "sources": "https://github.com/TropheusJ/fabric-example-mod"
+    "sources": "https://github.com/devOS-Sanity-Edition/blocky-bass"
   },
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/blocky_bass/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.tropheusj.modid.ExampleMod"
+      "one.devos.nautical.blocky_bass.BlockyBass"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "blocky_bass.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
