@@ -27,7 +27,7 @@ public class BlockyBassModel extends Model {
 	private final ModelPart tail;
 
 	public BlockyBassModel(ModelPart root) {
-		super(RenderType::entitySolid);
+		super(RenderType::entityCutout);
 		this.le_fishe = root.getChild("le_fishe");
 		this.head = le_fishe.getChild("head");
 		this.mouth = head.getChild("lower_mouth");
