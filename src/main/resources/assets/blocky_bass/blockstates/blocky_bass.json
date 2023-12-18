@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=east,has_record=false": {
+      "model": "blocky_bass:block/blocky_bass",
+      "y": 90
+    },
+    "facing=east,has_record=true": {
+      "model": "blocky_bass:block/blocky_bass",
+      "y": 90
+    },
+    "facing=north,has_record=false": {
+      "model": "blocky_bass:block/blocky_bass",
+      "y": 0
+    },
+    "facing=north,has_record=true": {
+      "model": "blocky_bass:block/blocky_bass",
+      "y": 0
+    },
+    "facing=south,has_record=false": {
+      "model": "blocky_bass:block/blocky_bass",
+      "y": 180
+    },
+    "facing=south,has_record=true": {
+      "model": "blocky_bass:block/blocky_bass",
+      "y": 180
+    },
+    "facing=west,has_record=false": {
+      "model": "blocky_bass:block/blocky_bass",
+      "y": 270
+    },
+    "facing=west,has_record=true": {
+      "model": "blocky_bass:block/blocky_bass",
+      "y": 270
+    }
+  }
+}

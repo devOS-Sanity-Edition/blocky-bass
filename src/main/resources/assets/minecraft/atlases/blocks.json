@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "blocky_bass:entity/blocky_bass"
+    }
+  ]
+}
