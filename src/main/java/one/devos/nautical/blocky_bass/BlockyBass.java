@@ -18,6 +18,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import one.devos.nautical.blocky_bass.block.BlockyBassBlock;
+import one.devos.nautical.blocky_bass.block.BlockyBassBlockEntity;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +28,7 @@ public class BlockyBass implements ModInitializer {
 	public static final String ID = "blocky_bass";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 
-	public static final Block BLOCK = new BlockyBassBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS));
+	public static final Block BLOCK = new BlockyBassBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).nonOpaque());
 
 	public static final BlockEntityType<BlockyBassBlockEntity> BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(BlockyBassBlockEntity::new)
 					.addBlock(BLOCK)

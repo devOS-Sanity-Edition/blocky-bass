@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "one.devos.nautical.blocky_bass.BlockyBass"
+    ],
+    "client": [
+      "one.devos.nautical.blocky_bass.BlockyBassClient"
     ]
   },
   "mixins": [
