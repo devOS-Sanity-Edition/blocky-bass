@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "blocky_bass:blocky_bass"
+    },
+    "title": {
+      "translate": "advancement.blocky_bass.blocky_bass_title"
+    },
+    "description": {
+      "translate": "advancement.blocky_bass.blocky_bass_description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "minecraft:husbandry/fishy_business",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blocky_bass:blocky_bass"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 50
+  }
+}
