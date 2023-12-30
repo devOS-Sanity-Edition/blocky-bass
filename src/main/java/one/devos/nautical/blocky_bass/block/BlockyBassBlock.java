@@ -1,7 +1,5 @@
 package one.devos.nautical.blocky_bass.block;
 
-import com.mojang.serialization.MapCodec;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -105,11 +103,6 @@ public class BlockyBassBlock extends JukeboxBlock {
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
 		return BaseEntityBlock.createTickerHelper(type, BlockyBass.BLOCK_ENTITY, BlockyBassBlockEntity::tick);
-	}
-
-	@Override
-	public MapCodec<JukeboxBlock> codec() {
-		throw new UnsupportedOperationException();
 	}
 
 	private static VoxelShape shape(double minX, double minZ, double maxX, double maxZ) {
