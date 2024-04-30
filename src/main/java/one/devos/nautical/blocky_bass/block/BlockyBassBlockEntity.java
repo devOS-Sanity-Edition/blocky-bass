@@ -1,6 +1,7 @@
 package one.devos.nautical.blocky_bass.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -33,8 +34,8 @@ public class BlockyBassBlockEntity extends JukeboxBlockEntity {
 	}
 
 	@Override
-	public CompoundTag getUpdateTag() {
-		return this.saveWithoutMetadata();
+	public CompoundTag getUpdateTag(Provider provider) {
+		return this.saveWithoutMetadata(provider);
 	}
 
 	@Nullable
