@@ -2,7 +2,7 @@
 //file:noinspection GroovyAccessibility
 //file:noinspection GradlePackageVersionRange
 plugins {
-	id "fabric-loom" version "1.10.+"
+	id "fabric-loom" version "1.9.+"
 	id "maven-publish"
 }
 
