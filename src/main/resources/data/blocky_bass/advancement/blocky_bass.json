@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "blocky_bass:blocky_bass"
+      "id": "blocky_bass:blocky_bass"
     },
     "title": {
       "translate": "advancement.blocky_bass.blocky_bass_title"
@@ -21,9 +21,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "blocky_bass:blocky_bass"
-            ]
+            "items": "blocky_bass:blocky_bass"
           }
         ]
       }
