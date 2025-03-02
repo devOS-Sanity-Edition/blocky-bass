@@ -20,7 +20,7 @@ import one.devos.nautical.blocky_bass.BlockyBass;
 
 public class BlockyBassModel extends Model {
 	public static final ResourceLocation TEXTURE = BlockyBass.id("textures/entity/blocky_bass.png");
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "blocky_bass"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(BlockyBass.id("blocky_bass"), "main");
 	private final ModelPart le_fishe;
 	private final ModelPart head;
 	private final ModelPart mouth;
@@ -29,9 +29,9 @@ public class BlockyBassModel extends Model {
 	public BlockyBassModel(ModelPart root) {
 		super(RenderType::entityCutout);
 		this.le_fishe = root.getChild("le_fishe");
-		this.head = le_fishe.getChild("head");
-		this.mouth = head.getChild("lower_mouth");
-		this.tail = le_fishe.getChild("tail");
+		this.head = this.le_fishe.getChild("head");
+		this.mouth = this.head.getChild("lower_mouth");
+		this.tail = this.le_fishe.getChild("tail");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -60,10 +60,9 @@ public class BlockyBassModel extends Model {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		le_fishe.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+		this.le_fishe.render(poseStack, buffer, packedLight, packedOverlay, color);
 	}
-
 
 	public void setRotations(BlockyBassBlockEntity bass, float partialTicks) {
 		this.head.yRot = -bass.head.value(partialTicks);

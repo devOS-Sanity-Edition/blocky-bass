@@ -53,7 +53,6 @@ public class BlockyBassBlock extends JukeboxBlock {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return switch (state.getValue(FACING)) {
 			case NORTH -> NORTH_SHAPE;
@@ -65,7 +64,6 @@ public class BlockyBassBlock extends JukeboxBlock {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
 		if (!oldState.is(state.getBlock())) {
 			this.checkPoweredState(world, pos, state);
@@ -73,7 +71,6 @@ public class BlockyBassBlock extends JukeboxBlock {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
 		this.checkPoweredState(world, pos, state);
 	}

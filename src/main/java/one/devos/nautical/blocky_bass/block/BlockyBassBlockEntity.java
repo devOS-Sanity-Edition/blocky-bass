@@ -1,6 +1,7 @@
 package one.devos.nautical.blocky_bass.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -9,9 +10,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import one.devos.nautical.blocky_bass.BlockyBass;
-import one.devos.nautical.blocky_bass.block.BassPartRotation.RandomlyFlap;
-import one.devos.nautical.blocky_bass.mixin.BlockEntityAccessor;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -21,20 +19,19 @@ public class BlockyBassBlockEntity extends JukeboxBlockEntity {
 	public final BassPartRotation tail;
 
 	public BlockyBassBlockEntity(BlockPos pos, BlockState state) {
-		super(pos, state);
-		((BlockEntityAccessor) this).setType(BlockyBass.BLOCK_ENTITY);
+		super(pos, state); // type is fixed in JukeboxBlockEntityMixin
 		this.head = new BassPartRotation();
 		this.mouth = new BassPartRotation();
 		this.tail = new BassPartRotation.RandomlyFlap();
 	}
 
 	public boolean isActive() {
-		return this.isRecordPlaying() || this.getBlockState().getValue(BlockyBassBlock.POWERED);
+		return this.getSongPlayer().isPlaying() || this.getBlockState().getValue(BlockyBassBlock.POWERED);
 	}
 
 	@Override
-	public CompoundTag getUpdateTag() {
-		return this.saveWithoutMetadata();
+	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+		return this.saveWithoutMetadata(registries);
 	}
 
 	@Nullable
@@ -45,7 +42,7 @@ public class BlockyBassBlockEntity extends JukeboxBlockEntity {
 
 	public static void tick(Level level, BlockPos pos, BlockState state, BlockyBassBlockEntity bass) {
 		if (state.getValue(JukeboxBlock.HAS_RECORD)) {
-			JukeboxBlockEntity.playRecordTick(level, pos, state, bass);
+			JukeboxBlockEntity.tick(level, pos, state, bass);
 		}
 
 		if (!level.isClientSide)
