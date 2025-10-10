@@ -45,7 +45,7 @@ public class BlockyBassBlockEntity extends JukeboxBlockEntity {
 			JukeboxBlockEntity.tick(level, pos, state, bass);
 		}
 
-		if (!level.isClientSide)
+		if (!level.isClientSide())
 			return;
 
 		// update state

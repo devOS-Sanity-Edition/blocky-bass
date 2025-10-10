@@ -16,7 +16,7 @@ public class BassPartRotation {
 		this.current = this.next();
 		if (this.toggleDirection(random)) {
 			this.forwards = !this.forwards;
-			this.target = forwards ? MAX : 0;
+			this.target = this.forwards ? MAX : 0;
 		}
 	}
 
@@ -32,9 +32,9 @@ public class BassPartRotation {
 
 	private float next() {
 		if (this.forwards) {
-			return Math.min(this.current + SPEED, target);
+			return Math.min(this.current + SPEED, this.target);
 		} else {
-			return Math.max(this.current - SPEED, target);
+			return Math.max(this.current - SPEED, this.target);
 		}
 	}
 

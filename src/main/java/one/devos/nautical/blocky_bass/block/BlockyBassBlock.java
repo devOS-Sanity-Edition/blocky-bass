@@ -18,8 +18,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -29,13 +30,15 @@ import one.devos.nautical.blocky_bass.BlockyBass;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockyBassBlock extends JukeboxBlock {
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
 	public static final VoxelShape NORTH_SHAPE = shape(0, 12, 16, 16);
 	public static final VoxelShape SOUTH_SHAPE = shape(0, 0, 16, 4);
 	public static final VoxelShape EAST_SHAPE = shape(0, 0, 4, 16);
 	public static final VoxelShape WEST_SHAPE = shape(12, 0, 16, 16);
+
+	public static final MapCodec<BlockyBassBlock> CODEC = simpleCodec(BlockyBassBlock::new);
 
 	public BlockyBassBlock(Properties properties) {
 		super(properties);
@@ -71,8 +74,8 @@ public class BlockyBassBlock extends JukeboxBlock {
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-		this.checkPoweredState(world, pos, state);
+	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean notify) {
+		this.checkPoweredState(level, pos, state);
 	}
 
 	private void checkPoweredState(Level world, BlockPos pos, BlockState state) {
@@ -92,7 +95,6 @@ public class BlockyBassBlock extends JukeboxBlock {
 		return this.defaultBlockState().setValue(FACING, face);
 	}
 
-	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new BlockyBassBlockEntity(pos, state);
@@ -105,8 +107,9 @@ public class BlockyBassBlock extends JukeboxBlock {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public MapCodec<JukeboxBlock> codec() {
-		throw new UnsupportedOperationException();
+		return (MapCodec<JukeboxBlock>) (Object) CODEC;
 	}
 
 	private static VoxelShape shape(double minX, double minZ, double maxX, double maxZ) {

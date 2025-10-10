@@ -5,6 +5,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableSource;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,7 +38,7 @@ public class BlockyBass implements ModInitializer {
 
 	public static final Block BLOCK = new BlockyBassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion());
 
-	public static final BlockEntityType<BlockyBassBlockEntity> BLOCK_ENTITY = BlockEntityType.Builder.of(
+	public static final BlockEntityType<BlockyBassBlockEntity> BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(
 			BlockyBassBlockEntity::new, BLOCK
 	).build();
 
