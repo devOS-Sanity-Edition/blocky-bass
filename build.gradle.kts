@@ -8,8 +8,7 @@ group = "one.devos.nautical"
 
 val buildNum = providers.environmentVariable("GITHUB_RUN_NUMBER")
     .filter(String::isNotEmpty)
-    .map { "build.$it" }
-    .orElse("local")
+    .orElse("99999")
     .get()
 
 version = "1.0.$buildNum+mc${libs.versions.minecraft.get()}"
