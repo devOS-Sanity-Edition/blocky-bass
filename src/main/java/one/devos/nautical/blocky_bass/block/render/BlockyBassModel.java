@@ -1,10 +1,5 @@
-package one.devos.nautical.blocky_bass.block;
+package one.devos.nautical.blocky_bass.block.render;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-
-import com.mojang.blaze3d.vertex.VertexConsumer;
-
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -18,20 +13,19 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import one.devos.nautical.blocky_bass.BlockyBass;
 
-public class BlockyBassModel extends Model {
+public class BlockyBassModel extends Model<BassRotations> {
 	public static final ResourceLocation TEXTURE = BlockyBass.id("textures/entity/blocky_bass.png");
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(BlockyBass.id("blocky_bass"), "main");
-	private final ModelPart le_fishe;
 	private final ModelPart head;
 	private final ModelPart mouth;
 	private final ModelPart tail;
 
 	public BlockyBassModel(ModelPart root) {
-		super(RenderType::entityCutout);
-		this.le_fishe = root.getChild("le_fishe");
-		this.head = this.le_fishe.getChild("head");
+		super(root, RenderType::entityCutout);
+		ModelPart le_fishe = root.getChild("le_fishe");
+		this.head = le_fishe.getChild("head");
 		this.mouth = this.head.getChild("lower_mouth");
-		this.tail = this.le_fishe.getChild("tail");
+		this.tail = le_fishe.getChild("tail");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -60,13 +54,9 @@ public class BlockyBassModel extends Model {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-		this.le_fishe.render(poseStack, buffer, packedLight, packedOverlay, color);
-	}
-
-	public void setRotations(BlockyBassBlockEntity bass, float partialTicks) {
-		this.head.yRot = -bass.head.value(partialTicks);
-		this.mouth.zRot = -bass.mouth.value(partialTicks);
-		this.tail.yRot = bass.tail.value(partialTicks);
+	public void setupAnim(BassRotations rotations) {
+		this.head.yRot = -rotations.head;
+		this.mouth.zRot = -rotations.mouth;
+		this.tail.yRot = rotations.tail;
 	}
 }

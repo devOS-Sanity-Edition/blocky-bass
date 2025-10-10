@@ -3,8 +3,8 @@ package one.devos.nautical.blocky_bass;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import one.devos.nautical.blocky_bass.block.BlockyBassBlockEntityRenderer;
-import one.devos.nautical.blocky_bass.block.BlockyBassModel;
+import one.devos.nautical.blocky_bass.block.render.BlockyBassBlockEntityRenderer;
+import one.devos.nautical.blocky_bass.block.render.BlockyBassModel;
 
 public class BlockyBassClient implements ClientModInitializer {
 	@Override

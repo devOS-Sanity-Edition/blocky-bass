@@ -5,15 +5,14 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableSource;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -29,28 +28,36 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import one.devos.nautical.blocky_bass.block.BlockyBassBlock;
 import one.devos.nautical.blocky_bass.block.BlockyBassBlockEntity;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class BlockyBass implements ModInitializer {
 	public static final String ID = "blocky_bass";
-	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 
-	public static final Block BLOCK = new BlockyBassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion());
+	private static final ResourceLocation id = id("blocky_bass");
 
-	public static final BlockEntityType<BlockyBassBlockEntity> BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(
-			BlockyBassBlockEntity::new, BLOCK
-	).build();
+	public static final Block BLOCK = Registry.register(
+			BuiltInRegistries.BLOCK, id, new BlockyBassBlock(
+					BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
+							.setId(ResourceKey.create(Registries.BLOCK, id))
+							.noOcclusion()
+			)
+	);
 
-	public static final Item ITEM = new BlockItem(BLOCK, new Item.Properties());
+	public static final BlockEntityType<BlockyBassBlockEntity> BLOCK_ENTITY = Registry.register(
+			BuiltInRegistries.BLOCK_ENTITY_TYPE, id,
+			FabricBlockEntityTypeBuilder.create(
+					BlockyBassBlockEntity::new, BLOCK
+			).build()
+	);
+
+	public static final Item ITEM = Registry.register(
+			BuiltInRegistries.ITEM, id,
+			new BlockItem(BLOCK, new Item.Properties()
+					.setId(ResourceKey.create(Registries.ITEM, id))
+					.useBlockDescriptionPrefix()
+			)
+	);
 
 	@Override
 	public void onInitialize() {
-		ResourceLocation id = id("blocky_bass");
-		Registry.register(BuiltInRegistries.BLOCK, id, BLOCK);
-		Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, id, BLOCK_ENTITY);
-		Registry.register(BuiltInRegistries.ITEM, id, ITEM);
-
 		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS)
 				.register(entries -> entries.addAfter(Blocks.JUKEBOX, ITEM));
 

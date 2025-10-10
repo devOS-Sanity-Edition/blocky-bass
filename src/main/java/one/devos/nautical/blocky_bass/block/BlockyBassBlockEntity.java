@@ -14,15 +14,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockyBassBlockEntity extends JukeboxBlockEntity {
-	public final BassPartRotation head;
-	public final BassPartRotation mouth;
-	public final BassPartRotation tail;
+	public final BassParts parts;
 
 	public BlockyBassBlockEntity(BlockPos pos, BlockState state) {
 		super(pos, state); // type is fixed in JukeboxBlockEntityMixin
-		this.head = new BassPartRotation();
-		this.mouth = new BassPartRotation();
-		this.tail = new BassPartRotation.RandomlyFlap();
+		this.parts = new BassParts();
 	}
 
 	public boolean isActive() {
@@ -50,13 +46,9 @@ public class BlockyBassBlockEntity extends JukeboxBlockEntity {
 
 		// update state
 		if (bass.isActive()) {
-			bass.head.tick(level.random);
-			bass.mouth.tick(level.random);
-			bass.tail.tick(level.random);
+			bass.parts.tick(level.random);
 		} else {
-			bass.head.tickInactive();
-			bass.mouth.tickInactive();
-			bass.tail.tickInactive();
+			bass.parts.tickInactive();
 		}
 	}
 }
